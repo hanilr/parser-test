@@ -1,0 +1,4 @@
+# THIS IS THE COMMENT SYMBOL.
+print("Hello, ") # Say "Hello" to terminal!
+print("\n") # "\n" is a new line symbol.
+print("World!\0 And this string do not print!") # "\0" is a end of string symbol.
