@@ -19,11 +19,7 @@ void print_chars(char *str)
             printf("\n");
             i+=1;
         }
-        else if(str[i] == '\\' && str[i+1] == '0')
-        {
-            str[i+2] = '\0';
-            break;
-        }
+        else if(str[i] == '\\' && str[i+1] == '0') { break; }
         else { printf("%c", str[i]); }
     }
 }

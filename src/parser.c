@@ -16,12 +16,14 @@ int parser(char *file_name)
     const char *whole_file = read_file(file_name);
     int line_of_str = chrepeat(whole_file, '\n')+1;
 
-    for(int i = 1; line_of_str > i; i+=1)
+    for(int i = 1; line_of_str+1 > i; i+=1)
     {
         const char *str_temp = (char*) malloc(strlen(get_line(file_name, i))+1);
         str_temp = get_line(file_name, i);
 
         /* STATEMENTS */
+        if(i == line_of_str && whole_file[strlen(whole_file)] == '\0') { break; } /* IF LAST LINE EMPTY */
+
         if(subinstr(str_temp, "#") == 0) /* COMMENT SECTION */
         {
             char *temp = (char*) malloc(strlen(str_temp)+1);
