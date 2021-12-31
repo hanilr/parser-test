@@ -14,6 +14,7 @@ const char *read_file(char *file)
     long file_size;
 
     FILE *rf = fopen(file, "r");
+    if(rf == 0) { fprintf(stderr, "FILE NOT EXIST!"); }
 
     fseek(rf, 0, SEEK_END);
     file_size = ftell(rf);
