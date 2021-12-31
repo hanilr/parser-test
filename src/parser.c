@@ -50,6 +50,7 @@ int parser(const char *str)
             content[content_line+1] = '\0';
             print(content);
         }
+        free((char*) str_temp);
     }
     return 0;
 }
