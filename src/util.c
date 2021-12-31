@@ -59,33 +59,4 @@ int lastpos(const char *str, char *chr)
     return word_pos;
 } /* START WITH 0 */
 
-const char *get_line(const char *str, int line)
-{
-    int x = 0, y = 0, temp_line = 0, lines = chrepeat(str, '\n')+1;
-    char *str_temp = (char*) malloc(strlen(str)+1);
-
-    memset(str_temp, 0, strlen(str));
-    while(lines>temp_line)
-    {
-        str_temp[x] = str[y];
-        if(str[y] == '\n' || str[y] == '\0')
-        {
-            temp_line+=1;
-            if(temp_line != line)
-            {
-                memset(str_temp, 0, strlen(str));
-                x = -1;
-            }
-            else
-            {
-                str_temp[strlen(str_temp)+1] = 0;
-                break;
-            }
-        }
-        x+=1;
-        y+=1;
-    }
-    return str_temp;
-}
-
 /* MADE BY @hanilr */
