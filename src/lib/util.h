@@ -3,7 +3,7 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
-int chrepeat(const char *str, int ascii); /* REPEAT TIMES OF A CHARACTER IN A STRING */
+int chrepeat(const char *str, char ascii); /* REPEAT TIMES OF A CHARACTER IN A STRING */
 
 int dislen(const char *str, int first_pos, char *chr1, char *chr2); /* DISTANCE TWO CHARACTER IN A STRING */
 
