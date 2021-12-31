@@ -5,4 +5,6 @@
 
 const char *read_file(char *file);
 
+const char *get_line(char *file, int line);
+
 #endif /* MADE BY @hanilr */

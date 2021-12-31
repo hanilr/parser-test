@@ -27,4 +27,27 @@ const char *read_file(char *file)
     return file_content;
 }
 
+const char *get_line(char *file, int line)
+{
+    int current_line = 0;
+    long file_size;
+
+    FILE *gl = fopen(file, "r");
+    if(gl == 0) { fprintf(stderr, "FILE NOT EXIST!"); }
+
+    fseek(gl, 0, SEEK_END);
+    file_size = ftell(gl);
+    fseek(gl, 0, SEEK_SET);
+
+    char *str_temp = (char*) malloc(file_size+1);
+    while(line > current_line)
+    {
+        fgets(str_temp, file_size+1, gl);
+        current_line+=1;
+    }
+
+    fclose(gl);
+    return str_temp;
+}
+
 /* MADE BY @hanilr */
