@@ -12,7 +12,7 @@
 
 int parser(const char *str)
 {
-    int line_of_str = chrepeat(str, 10)+1;
+    int line_of_str = chrepeat(str, '\n')+1;
 
     for(int i = 1; line_of_str+1 > i; i+=1)
     {
@@ -38,7 +38,7 @@ int parser(const char *str)
         if(subinstr(str_temp, "print") == 0)
         {
             /* ERRORS */
-            if(subinstr(str_temp, "\"") == 0 && chrepeat(str_temp, 34)%2 != 0) { return 1; }
+            if(subinstr(str_temp, "\"") == 0 && chrepeat(str_temp, '"')%2 != 0) { return 1; }
             if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0) { return 1; }
 
             int command_pos = lastpos(str_temp, "print");

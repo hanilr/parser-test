@@ -61,14 +61,14 @@ int lastpos(const char *str, char *chr)
 
 const char *get_line(const char *str, int line)
 {
-    int x = 0, y = 0, temp_line = 0, lines = chrepeat(str, 10)+1;
+    int x = 0, y = 0, temp_line = 0, lines = chrepeat(str, '\n')+1;
     char *str_temp = (char*) malloc(strlen(str)+1);
 
     memset(str_temp, 0, strlen(str));
     while(lines>temp_line)
     {
         str_temp[x] = str[y];
-        if(str[y] == 10 || str[y] == 0)
+        if(str[y] == '\n' || str[y] == '\0')
         {
             temp_line+=1;
             if(temp_line != line)
