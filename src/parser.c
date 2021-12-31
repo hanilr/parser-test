@@ -7,17 +7,19 @@
 
 /* DIY LIBRARY */
 #include "lib/parser.h"
+#include "lib/file.h"
 #include "lib/util.h"
 #include "lib/command.h"
 
-int parser(const char *str)
+int parser(char *file_name)
 {
-    int line_of_str = chrepeat(str, '\n')+1;
+    const char *whole_file = read_file(file_name);
+    int line_of_str = chrepeat(whole_file, '\n')+1;
 
-    for(int i = 1; line_of_str+1 > i; i+=1)
+    for(int i = 1; line_of_str > i; i+=1)
     {
-        const char *str_temp = (char*) malloc(strlen(get_line(str, i))+1);
-        str_temp = get_line(str, i);
+        const char *str_temp = (char*) malloc(strlen(get_line(file_name, i))+1);
+        str_temp = get_line(file_name, i);
 
         /* STATEMENTS */
         if(subinstr(str_temp, "#") == 0) /* COMMENT SECTION */
