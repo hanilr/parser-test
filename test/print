@@ -1,0 +1,4 @@
+print(test without quotation mark)
+print("test with quotation mark")
+print("\n\nnew\nline\n\n")
+print("end of the\0line")
