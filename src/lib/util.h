@@ -11,4 +11,6 @@ int subinstr(const char *str, char *chr); /* CHECK SUBSTRING IF IN THE STRING */
 
 int lastpos(const char *str, char *chr); /* LAST POSITION OF A WORD IN A STRING */
 
+int lastpos_line(const char *str, char *chr, int line); /* LIKE 'lastpos' BUT YOU CAN GET LINES */
+
 #endif /* MADE BY @hanilr */

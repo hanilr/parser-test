@@ -56,4 +56,21 @@ int lastpos(const char *str, char *chr)
     return word_pos;
 } /* START WITH 0 */
 
+int lastpos_line(const char *str, char *chr, int line)
+{
+    int pos = lastpos(str, chr), pos_line;
+    if(line == 1) { return pos; }
+    char *temp = (char*) malloc(strlen(str)+1);
+
+    for(int i = 0; line > i; i+=1)
+    {
+        for(int i = 0; strlen(str)-pos > i; i+=1) { temp[i] = str[pos+i]; }
+        pos_line = lastpos(temp, chr);
+        pos += pos_line+1;
+    }
+
+    free(temp);
+    return pos-1;
+}
+
 /* MADE BY @hanilr */
