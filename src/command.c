@@ -10,6 +10,22 @@
 #include "lib/command.h"
 #include "lib/util.h"
 
+int calc(char operation, int x, int y)
+{
+    switch((int) operation)
+    {
+        case '+':
+            return x+y;
+        case '-':
+            return x-y;
+        case '*':
+            return x*y;
+        case '/':
+            if(x%y == 0) { return x/y; }
+            else { return 0; }
+    }
+}
+
 void print_chars(char *str)
 {
     for(int i = 0; strlen(str) > i; i+=1)
