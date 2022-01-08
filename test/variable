@@ -1,0 +1,8 @@
+$test = "merhaba"
+$foo = "bar"
+
+print($test)
+print($foo)
+$after_line = "yep"
+
+print($after_line)
