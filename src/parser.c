@@ -171,6 +171,7 @@ int parser(char *file_name)
             else { print(content); }
             free(content);
         } /* PRINT */
+        if(subinstr(str_temp, "clrscr()") == 0) { clrscr(); } /* CLEAR SCREEN */
         free((char*) str_temp);
     }
     return 0;
