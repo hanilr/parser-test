@@ -14,7 +14,11 @@ const char *read_file(char *file)
     long file_size;
 
     FILE *rf = fopen(file, "r");
-    if(rf == 0) { fprintf(stderr, "FILE NOT EXIST!"); }
+    if(rf == 0)
+    {
+        fprintf(stderr, "FILE NOT EXIST!");
+        exit(1);
+    }
 
     fseek(rf, 0, SEEK_END);
     file_size = ftell(rf);
@@ -33,7 +37,11 @@ const char *get_line(char *file, int line)
     long file_size;
 
     FILE *gl = fopen(file, "r");
-    if(gl == 0) { fprintf(stderr, "FILE NOT EXIST!"); }
+    if(gl == 0)
+    {
+        fprintf(stderr, "FILE NOT EXIST!");
+        exit(1);
+    }
 
     fseek(gl, 0, SEEK_END);
     file_size = ftell(gl);
