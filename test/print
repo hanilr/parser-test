@@ -1,4 +1,12 @@
-print(test without quotation mark)
-print("test with quotation mark")
+print(test without quotation mark) # No result
+print("test with quotation mark") # test with quotation mark
+
 print("\n\nnew\nline\n\n")
-print("end of the\0line")
+#
+#
+# new
+# line
+#
+#
+
+print("end of the\0line") # end of the

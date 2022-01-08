@@ -1,8 +1,9 @@
-$test = "merhaba"
+$test = "test"
 $foo = "bar"
 
-print($test)
-print($foo)
+print($test) # test
+print($foo) # bar
+
 $after_line = "yep"
 
-print($after_line)
+print($after_line) # yep
