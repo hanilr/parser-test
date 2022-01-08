@@ -49,7 +49,7 @@ void print(char *raw_str)
         for(int i = 0; strlen(raw_str)-2 > i; i+=1) { str[i] = raw_str[i+1]; }
         print_chars(str);
     }
-    else { /* VARIABLE SECTION */ }
+    else { print_chars(raw_str); }
 }
 
 /* MADE BY @hanilr */
