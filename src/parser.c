@@ -63,7 +63,11 @@ int parser(char *file_name)
         }
         if(str_temp[0] == '$') /* VARIABLE SECTION */
         {
-            if(var_count == 128) { return 1; }
+            if(var_count == 128)
+            {
+                fprintf(stderr, "PARSER ERROR: Too much variable!");
+                return 1;
+            }
 
             int var_pos = lastpos(str_temp, "$")+1;
             int content_pos = lastpos(str_temp, "\"")+1;
@@ -97,7 +101,11 @@ int parser(char *file_name)
         /* COMMANDS */
         if(str_temp[0] == '(' && (subinstr(str_temp, "+") == 0 || subinstr(str_temp, "-") == 0 ||subinstr(str_temp, "*") == 0 ||subinstr(str_temp, "/") == 0))
         {
-            if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0) { return 1; }
+            if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
+            {
+                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
+                return 1;
+            }
 
             int content_line = dislen(str_temp, 0, "(", ")");
             int arg_count = chrepeat(str_temp, ' ');
@@ -112,7 +120,11 @@ int parser(char *file_name)
         if(subinstr(str_temp, "print") == 0)
         {
             /* ERRORS */
-            if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0) { return 1; }
+            if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
+            {
+                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
+                return 1;
+            }
 
             int command_pos = lastpos(str_temp, "print");
             int content_line = dislen(str_temp, command_pos, "(", ")");
@@ -124,7 +136,11 @@ int parser(char *file_name)
 
             if(subinstr(content, "$") == 0)
             {
-                if(subinstr(content, "\"") == 0) { return 1; }
+                if(subinstr(content, "\"") == 0)
+                {
+                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
+                return 1;
+            }
 
                 char *var_buffer = (char*) malloc(content_line);
                 int var_pos = lastpos(content, "$");
