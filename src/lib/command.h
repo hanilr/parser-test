@@ -9,4 +9,6 @@ void print_chars(char *str);
 
 void print(char *raw_str);
 
+void clrscr(void); /* CLEAR SCREEN */
+
 #endif /* MADE BY @hanilr */

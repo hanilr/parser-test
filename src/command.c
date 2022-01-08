@@ -52,4 +52,13 @@ void print(char *raw_str)
     else { print_chars(raw_str); }
 }
 
+void clrscr(void)
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 /* MADE BY @hanilr */
