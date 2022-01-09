@@ -103,7 +103,7 @@ int parser(char *file_name)
         {
             if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
             {
-                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
+                fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (MATH)");
                 return 1;
             }
 
@@ -122,7 +122,7 @@ int parser(char *file_name)
             /* ERRORS */
             if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
             {
-                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
+                fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (PRINT)");
                 return 1;
             }
 
@@ -138,9 +138,9 @@ int parser(char *file_name)
             {
                 if(subinstr(content, "\"") == 0)
                 {
-                fprintf(stderr, "PARSER ERROR: Uncorrect syntax!");
-                return 1;
-            }
+                    fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (VARIABLE)");
+                    return 1;
+                }
 
                 char *var_buffer = (char*) malloc(content_line);
                 int var_pos = lastpos(content, "$");
