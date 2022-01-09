@@ -1,0 +1,12 @@
+GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
+
+[CURRENT GAOL:] []
+
+        CURRENT FAILS
+[] If multiple space (parser.c:113)
+[] If last line empty error (parser.c:53)
+[] Variable section has data limits.
+
+        FEATURE LIST
+[] Condition statements.
+[] Loops.
