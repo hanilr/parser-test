@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         while(1)
         {
             printf("\n> ");
-            scanf("%s", com);
+            gets(com);
             if(subinstr(com, "quit()") == 0) { break; }
             else
             {
@@ -28,7 +28,9 @@ int main(int argc, char *argv[])
                 fwrite(com, 1, strlen(com), wf);
                 fclose(wf);
                 parser("test/temp");
+
                 remove("test/temp");
+                memset(com, 0, strlen(com)+1);
             }
         }
         free(com);
