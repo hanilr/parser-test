@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "MISSING ARGUMENT!");
         return 1;
     }
-    else { if(parser(argv[1]) != 0) { fprintf(stderr, "PARSER ERROR!"); } }
+    else { parser(argv[1]); }
     return 0;
 }
 
