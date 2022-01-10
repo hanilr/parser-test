@@ -3,6 +3,9 @@ GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
 [CURRENT GAOL:] []
 
         CURRENT FAILS
+[!PRIORITIZED!] In makefile compiler doesn't use ansi flag.
+(So all this time you compiled in standard c :D)
+
 [x] Error handling not good.
 [] Parser function should use strings not file.
 [] REPL and parser error. (main.c:27-33)
@@ -11,9 +14,6 @@ GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
 [] Variable section has data limits.
 
         FEATURE LIST
-[!PRIORITIZED!] In makefile compiler doesn't use ansi flag
-(So all this time you compiled in standard c :D)
-
 [] Readme section.
 [] Condition statements.
 [] Loops.
