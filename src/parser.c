@@ -13,6 +13,12 @@
 
 void calc_parser(char *raw, int arg_count)
 {
+    if(chrepeat(raw, '+') > 1 || chrepeat(raw, '-') > 1 || chrepeat(raw, '*') > 1 || chrepeat(raw, '/') > 1)
+    {
+        fprintf(stderr, "CALCULATOR PARSER ERROR: Too much operation symbol!");
+        exit(EXIT_FAILURE);
+    }
+
     char operation = raw[0];
     int result, x, y;
 
@@ -35,7 +41,7 @@ void calc_parser(char *raw, int arg_count)
     printf("%d ", result);
 }
 
-int parser(char *file_name)
+void parser(char *file_name)
 {
     const char *whole_file = read_file(file_name);
     int line_of_str = chrepeat(whole_file, '\n')+1;
@@ -66,7 +72,7 @@ int parser(char *file_name)
             if(var_count == 128)
             {
                 fprintf(stderr, "PARSER ERROR: Too much variable!");
-                return 1;
+                exit(EXIT_FAILURE);
             }
 
             int var_pos = lastpos(str_temp, "$")+1;
@@ -104,7 +110,7 @@ int parser(char *file_name)
             if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
             {
                 fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (MATH)");
-                return 1;
+                exit(EXIT_FAILURE);
             }
 
             int content_line = dislen(str_temp, 0, "(", ")");
@@ -123,7 +129,7 @@ int parser(char *file_name)
             if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
             {
                 fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (PRINT)");
-                return 1;
+                exit(EXIT_FAILURE);
             }
 
             int command_pos = lastpos(str_temp, "print");
@@ -139,7 +145,7 @@ int parser(char *file_name)
                 if(subinstr(content, "\"") == 0)
                 {
                     fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (VARIABLE)");
-                    return 1;
+                    exit(EXIT_FAILURE);
                 }
 
                 char *var_buffer = (char*) malloc(content_line);
@@ -163,7 +169,7 @@ int parser(char *file_name)
                         var_point = i;
                         break;
                     }
-                    if(i == 127) { return 1; }
+                    if(i == 127) { exit(EXIT_FAILURE); }
                 }
                 print(var[var_point].value);
                 free(var_buffer);
@@ -174,7 +180,6 @@ int parser(char *file_name)
         if(subinstr(str_temp, "clrscr()") == 0) { clrscr(); } /* CLEAR SCREEN */
         free((char*) str_temp);
     }
-    return 0;
 }
 
 /* MADE BY @hanilr */
