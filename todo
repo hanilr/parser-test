@@ -3,10 +3,16 @@ GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
 [CURRENT GAOL:] []
 
         CURRENT FAILS
+[] Error handling not good.
+[] Parser function should use strings not file.
+[] REPL and parser error. (main.c:27-33)
 [] If multiple space (parser.c:113)
 [] If last line empty error (parser.c:53)
 [] Variable section has data limits.
 
         FEATURE LIST
+[] Readme section.
 [] Condition statements.
 [] Loops.
+
+!WHEN PROJECT FINISHED. CHECK THE ABSTRACT TREE SYNTAX AND THEN FIX YOUR FAULTS!
