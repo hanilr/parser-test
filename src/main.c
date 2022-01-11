@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         while(1)
         {
             printf("\n> ");
-            gets(com);
+            fgets(com, 128, stdin);
             if(subinstr(com, "quit()") == 0) { break; }
             else
             {
