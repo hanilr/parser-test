@@ -23,7 +23,7 @@ endif
 .PHONY: run clean debug cleand
 
 run: $(main) $(lib)
-	$(CC) $(main) $(lib) -o $(output)
+	$(CC) $(ansi) $(main) $(lib) -o $(output)
 
 clean: $(output)
 	$(delete) $(output)
