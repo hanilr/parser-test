@@ -52,13 +52,6 @@ void print(char *raw_str)
     else { print_chars(raw_str); }
 }
 
-void clrscr(void)
-{
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-}
+void clrscr(void) { printf("\033[2J \033[H"); }
 
 /* MADE BY @hanilr */
