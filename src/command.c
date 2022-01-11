@@ -28,7 +28,8 @@ int calc(char operation, int x, int y)
 
 void print_chars(char *str)
 {
-    for(int i = 0; strlen(str) > i; i+=1)
+    int i = 0;
+    while(strlen(str) > i)
     {
         if(str[i] == '\\' && str[i+1] == 'n')
         {
@@ -37,6 +38,7 @@ void print_chars(char *str)
         }
         else if(str[i] == '\\' && str[i+1] == '0') { break; }
         else { printf("%c", str[i]); }
+        i+=1;
     }
 }
 
@@ -45,8 +47,14 @@ void print(char *raw_str)
     if(raw_str[0] == '"' && chrepeat(raw_str, '"')%2 == 0)
     {
         char *str = (char*) malloc(strlen(raw_str)-1);
+        int i = 0;
+        
         memset(str, 0, strlen(raw_str)-1);
-        for(int i = 0; strlen(raw_str)-2 > i; i+=1) { str[i] = raw_str[i+1]; }
+        while(strlen(raw_str)-2 > i)
+        {
+            str[i] = raw_str[i+1];
+            i+=1;
+        }
         print_chars(str);
     }
     else { print_chars(raw_str); }
