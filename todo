@@ -3,15 +3,8 @@ GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
 [CURRENT GAOL:] []
 
         CURRENT FAILS
-[!PRIORITIZED!] In makefile compiler doesn't use ansi flag.
-(So all this time you compiled in standard c :D)
-
-[x] Error handling not good.
+[] Comment section has memory leak.
 [] Parser function should use strings not file.
-[] REPL and parser error. (main.c:27-33)
-[] If multiple space (parser.c:113)
-[] If last line empty error (parser.c:53)
-[] Variable section has data limits.
 
         FEATURE LIST
 [] Readme section.
