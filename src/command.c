@@ -57,7 +57,6 @@ void print(char *raw_str)
         }
         print_chars(str);
     }
-    else { print_chars(raw_str); }
 }
 
 void clrscr(void) { printf("\033[2J \033[H"); }
