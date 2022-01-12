@@ -56,6 +56,7 @@ void print(char *raw_str)
             i+=1;
         }
         print_chars(str);
+        free(str);
     }
 }
 
