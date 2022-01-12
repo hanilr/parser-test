@@ -7,6 +7,7 @@ struct variable
 {
     char name[63];
     char value[2047];
+    int count;
 }; /* VARIABLE SECTION */
 
 void calc_parser(char *raw, int arg_count);
