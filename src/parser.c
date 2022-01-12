@@ -32,7 +32,7 @@ void calc_parser(char *raw, int arg_count)
     if(arg_count > 2)
     {
         int i = 2;
-        while(arg_count > i)
+        while(arg_count > i+1)
         {
             int pos = lastpos_line(raw, " ", i+1);
             int temp = raw[pos+1] - '0';
