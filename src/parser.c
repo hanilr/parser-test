@@ -191,7 +191,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
                 if(z == 127) { exit(EXIT_FAILURE); }
                 z+=1;
             }
-            print(var[var_point].value);
+            print_chars(var[var_point].value);
             free(var_buffer);
         } /* VARIABLE SECTION */
         else { print(content); }
