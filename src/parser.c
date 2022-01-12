@@ -18,13 +18,11 @@ void calc_parser(char *raw, int arg_count)
         fprintf(stderr, "CALCULATOR PARSER ERROR: Too much operation symbol!");
         exit(EXIT_FAILURE);
     }
-
     char operation = raw[0];
     int result, x, y;
 
     int pos_x = lastpos_line(raw, " ", 1);
     int pos_y = lastpos_line(raw, " ", 2);
-
     x = raw[pos_x+1] - '0';
     y = raw[pos_y+1] - '0';
     result = calc(operation, x, y);
@@ -49,8 +47,8 @@ void file_parser(char *file_name)
     int line_of_str = chrepeat(whole_file, '\n')+1, i = 1;
     if(chrepeat(whole_file, '\n') == 0) { line_of_str = 2; } /* IF ONLY ONE LINE IN A FILE */
     
-    struct variable var[127];
-    var[0].count = 0;
+    struct variable var[128];
+    var[0].count = 1;
 
     while(line_of_str+1 > i)
     {
@@ -68,7 +66,6 @@ void parser(char *str_temp, struct variable *var, int var_count)
     if(subinstr(str_temp, "#") == 0) /* COMMENT SECTION */
     {
         int comment_pos = lastpos(str_temp, "#");
-
         while(strlen(str_temp)+1 > comment_pos)
         {
             str_temp[comment_pos] = '\0';
@@ -77,7 +74,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
     }
     if(str_temp[0] == '$') /* VARIABLE SECTION */
     {
-        if(var_count == 128)
+        if(var_count == 129)
         {
             fprintf(stderr, "PARSER ERROR: Too much variable!");
             exit(EXIT_FAILURE);
@@ -125,7 +122,6 @@ void parser(char *str_temp, struct variable *var, int var_count)
 
         int content_line = dislen(str_temp, 0, "(", ")");
         int arg_count = chrepeat(str_temp, ' '), x = 0;
-
         if(str_temp[strlen(str_temp)] == ' ') { arg_count-=1; }
 
         char *content = (char*) malloc(content_line+1);
@@ -148,9 +144,9 @@ void parser(char *str_temp, struct variable *var, int var_count)
 
         int command_pos = lastpos(str_temp, "print"), x = 0;
         int content_line = dislen(str_temp, command_pos, "(", ")");
-        char *content = (char*) malloc(content_line+1);
 
-         memset(content, 0, content_line+1);
+        char *content = (char*) malloc(content_line+1);
+        memset(content, 0, content_line+1);
         while(content_line > x)
         {
             content[x] = str_temp[command_pos+x+2];
