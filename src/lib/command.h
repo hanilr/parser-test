@@ -11,4 +11,6 @@ void print(char *raw_str);
 
 void clrscr(void); /* CLEAR SCREEN */
 
+void quit(void);
+
 #endif /* MADE BY @hanilr */

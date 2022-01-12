@@ -61,4 +61,6 @@ void print(char *raw_str)
 
 void clrscr(void) { printf("\033[2J \033[H"); }
 
+void quit(void) { exit(EXIT_SUCCESS); }
+
 /* MADE BY @hanilr */
