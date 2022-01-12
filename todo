@@ -2,10 +2,6 @@ GOAL: MAKE A PROGRAMMING LANGUAGE IN C!
 
 [CURRENT GAOL:] []
 
-        CURRENT FAILS
-[] Comment section has memory leak.
-[] Parser function should use strings not file.
-
         FEATURE LIST
 [] Readme section.
 [] Condition statements.
