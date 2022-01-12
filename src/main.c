@@ -24,13 +24,9 @@ int main(int argc, char *argv[])
             if(subinstr(com, "quit()") == 0) { break; }
             else
             {
-                FILE *wf = fopen("test/temp", "w");
-                fwrite(com, 1, strlen(com), wf);
-                fclose(wf);
-                parser("test/temp");
-
-                remove("test/temp");
-                memset(com, 0, strlen(com)+1);
+                struct variable var[127];
+                int var_count = 0;
+                parser(com, var, var_count);
             }
         }
         free(com);
@@ -40,7 +36,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "MISSING ARGUMENT!");
         return 1;
     }
-    else { parser(argv[1]); }
+    else { file_parser(argv[1]); }
     return 0;
 }
 
