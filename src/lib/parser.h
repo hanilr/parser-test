@@ -11,6 +11,8 @@ struct variable
 
 void calc_parser(char *raw, int arg_count);
 
-void parser(char *file_name);
+void file_parser(char *file_name);
+
+void parser(char *str_temp, struct variable *var, int var_count);
 
 #endif /* MADE BY @hanilr */
