@@ -50,14 +50,14 @@ void file_parser(char *file_name)
     if(chrepeat(whole_file, '\n') == 0) { line_of_str = 2; } /* IF ONLY ONE LINE IN A FILE */
     
     struct variable var[127];
-    int var_count = 0;
+    var[0].count = 0;
 
     while(line_of_str+1 > i)
     {
+        if(i == line_of_str && whole_file[strlen(whole_file)] == '\0') { break; } /* IF LAST LINE EMPTY */
         const char *str_temp = (char*) malloc(strlen(get_line(file_name, i))+1);
         str_temp = get_line(file_name, i);
-        if(i == line_of_str && whole_file[strlen(whole_file)] == '\0') { break; } /* IF LAST LINE EMPTY */
-        parser((char*) str_temp, var, var_count);
+        parser((char*) str_temp, var, var[0].count);
         i+=1;
     }
 }
@@ -111,7 +111,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
         }
         strcpy(var[var_count].value, temp);
         free(temp);
-        var_count+=1;
+        var[0].count+=1;
     }
 
     /* COMMANDS */
