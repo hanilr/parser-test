@@ -21,13 +21,9 @@ int main(int argc, char *argv[])
         {
             printf("\n> ");
             fgets(com, 128, stdin);
-            if(subinstr(com, "quit()") == 0) { break; }
-            else
-            {
-                struct variable var[127];
-                int var_count = 0;
-                parser(com, var, var_count);
-            }
+            struct variable var[127];
+            int var_count = 0;
+            parser(com, var, var_count);
         }
         free(com);
     }

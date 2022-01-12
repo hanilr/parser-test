@@ -198,6 +198,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
         free(content);
     } /* PRINT */
     if(subinstr(str_temp, "clrscr()") == 0) { clrscr(); } /* CLEAR SCREEN */
+    if(subinstr(str_temp, "quit()") == 0) { quit(); } /* QUIT */
     free((char*) str_temp);
 }
 
