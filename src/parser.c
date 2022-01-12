@@ -67,17 +67,13 @@ void parser(char *str_temp, struct variable *var, int var_count)
     /* STATEMENTS */
     if(subinstr(str_temp, "#") == 0) /* COMMENT SECTION */
     {
-        char *temp = (char*) malloc(strlen(str_temp)+1);
-        int comment_pos = lastpos(str_temp, "#"), x = 0;
-        memset(temp, 0, strlen(temp)+1);
+        int comment_pos = lastpos(str_temp, "#");
 
-        while(comment_pos-1 > x)
+        while(strlen(str_temp)+1 > comment_pos)
         {
-            temp[x] = str_temp[x];
-            x+=1;
+            str_temp[comment_pos] = '\0';
+            comment_pos+=1;
         }
-        str_temp = temp;
-        free(temp);
     }
     if(str_temp[0] == '$') /* VARIABLE SECTION */
     {
