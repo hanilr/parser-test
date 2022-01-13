@@ -110,11 +110,29 @@ void parser(char *str_temp, struct variable *var, int var_count)
         free(temp);
         var[0].count+=1;
     }
+    if(subinstr(str_temp, "repeat(") == 0 && str_temp[lastpos(str_temp, "repeat")+1] == '(')
+    {
+        /* REPEAT LOOP SECTION */
+        if(subinstr(str_temp, "break()") == 0) { /* break; */ }
+    }
+    if(subinstr(str_temp, "loop(") == 0 && str_temp[lastpos(str_temp, "loop")+1] == '(')
+    {
+        /* INFINITE LOOP SECTION */
+        if(subinstr(str_temp, "break()") == 0) { /* break; */ }
+    }
+    if(subinstr(str_temp, "if(") == 0 && str_temp[lastpos(str_temp, "if")+1] == '(')
+    {
+        /* IF STATEMENT SECTION */
+    }
+    if(subinstr(str_temp, "ifelse(") == 0 && str_temp[lastpos(str_temp, "ifelse")+1] == '(')
+    {
+        /* IF ELSE STATEMENT SECTION */
+    }
 
     /* COMMANDS */
-    if(str_temp[0] == '(' && (subinstr(str_temp, "+") == 0 || subinstr(str_temp, "-") == 0 ||subinstr(str_temp, "*") == 0 ||subinstr(str_temp, "/") == 0))
+    if(str_temp[lastpos(str_temp, "(")] == '(' && (str_temp[lastpos(str_temp, "(")+1] == '+' || str_temp[lastpos(str_temp, "(")+1] == '-' || str_temp[lastpos(str_temp, "(")+1] == '*' || str_temp[lastpos(str_temp, "(")+1] == '/'))
     {
-        if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
+        if(subinstr(str_temp, ")") != 0 || chrepeat(str_temp, ')') > 1 || chrepeat(str_temp, '(') > 1)
         {
             fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (MATH)");
             exit(EXIT_FAILURE);
@@ -133,10 +151,10 @@ void parser(char *str_temp, struct variable *var, int var_count)
         calc_parser(content, arg_count);
         free(content);
     } /* MATH */
-    if(subinstr(str_temp, "print") == 0)
+    if(subinstr(str_temp, "print(") == 0)
     {
         /* ERRORS */
-        if(subinstr(str_temp, "(") != 0 || subinstr(str_temp, ")") != 0)
+        if(subinstr(str_temp, ")") != 0)
         {
             fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (PRINT)");
             exit(EXIT_FAILURE);
