@@ -110,9 +110,9 @@ void parser(char *str_temp, struct variable *var, int var_count)
         free(temp);
         var[0].count+=1;
     }
-    if(subinstr(str_temp, "repeat(") == 0)
+    if(subinstr(str_temp, "repeat(") == 0) /* REPEAT LOOP SECTION */
     {
-        /* REPEAT LOOP SECTION */
+        
         int command_pos = lastpos(str_temp, "repeat("), times;
         int times_line = dislen(str_temp, command_pos, "(", ")");
         int content_pos  = lastpos(str_temp, "{");
@@ -146,19 +146,13 @@ void parser(char *str_temp, struct variable *var, int var_count)
         memset(str_temp, 0, strlen(str_temp)+1);
         free(content);
     }
-    if(subinstr(str_temp, "loop(") == 0)
+    if(subinstr(str_temp, "if(") == 0) /* IF STATEMENT SECTION */
     {
-        /* INFINITE LOOP SECTION */
-
-        if(subinstr(str_temp, "break()") == 0) { /* break; */ }
+        
     }
-    if(subinstr(str_temp, "if(") == 0)
+    if(subinstr(str_temp, "ifelse(") == 0) /* IF ELSE STATEMENT SECTION */
     {
-        /* IF STATEMENT SECTION */
-    }
-    if(subinstr(str_temp, "ifelse(") == 0)
-    {
-        /* IF ELSE STATEMENT SECTION */
+        
     }
 
     /* COMMANDS */
