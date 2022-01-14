@@ -8,7 +8,6 @@
 /* DIY LIBRARY */
 #include "lib/util.h"
 #include "lib/file.h"
-#include "lib/command.h"
 
 int chrepeat(const char *str, char ascii)
 {
