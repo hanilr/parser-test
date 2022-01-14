@@ -110,21 +110,53 @@ void parser(char *str_temp, struct variable *var, int var_count)
         free(temp);
         var[0].count+=1;
     }
-    if(subinstr(str_temp, "repeat(") == 0 && str_temp[lastpos(str_temp, "repeat")+1] == '(')
+    if(subinstr(str_temp, "repeat(") == 0)
     {
         /* REPEAT LOOP SECTION */
-        if(subinstr(str_temp, "break()") == 0) { /* break; */ }
+        int command_pos = lastpos(str_temp, "repeat("), times;
+        int times_line = dislen(str_temp, command_pos, "(", ")");
+        int content_pos  = lastpos(str_temp, "{");
+        int content_line = dislen(str_temp, content_pos, "{", "}");
+        char *content = (char*) malloc(content_line+1);
+
+        int i = 0;
+        while(content_line > i)
+        {
+            content[i] = str_temp[content_pos+i+1];
+            i+=1;
+        }
+
+        if(times_line == 1) { times = str_temp[command_pos+1] - '0'; }
+        else
+        {
+            times = str_temp[command_pos+1] - '0';
+            int i = 1;
+            while(times_line > i)
+            {
+                times = (times * 10) + (str_temp[command_pos+i+1] - '0');
+                i+=1;
+            }
+        }
+
+        while(times > 0)
+        {
+            parser(content, var, var_count);
+            times-=1;
+        }
+        memset(str_temp, 0, strlen(str_temp)+1);
+        free(content);
     }
-    if(subinstr(str_temp, "loop(") == 0 && str_temp[lastpos(str_temp, "loop")+1] == '(')
+    if(subinstr(str_temp, "loop(") == 0)
     {
         /* INFINITE LOOP SECTION */
+
         if(subinstr(str_temp, "break()") == 0) { /* break; */ }
     }
-    if(subinstr(str_temp, "if(") == 0 && str_temp[lastpos(str_temp, "if")+1] == '(')
+    if(subinstr(str_temp, "if(") == 0)
     {
         /* IF STATEMENT SECTION */
     }
-    if(subinstr(str_temp, "ifelse(") == 0 && str_temp[lastpos(str_temp, "ifelse")+1] == '(')
+    if(subinstr(str_temp, "ifelse(") == 0)
     {
         /* IF ELSE STATEMENT SECTION */
     }
@@ -132,13 +164,14 @@ void parser(char *str_temp, struct variable *var, int var_count)
     /* COMMANDS */
     if(str_temp[lastpos(str_temp, "(")] == '(' && (str_temp[lastpos(str_temp, "(")+1] == '+' || str_temp[lastpos(str_temp, "(")+1] == '-' || str_temp[lastpos(str_temp, "(")+1] == '*' || str_temp[lastpos(str_temp, "(")+1] == '/'))
     {
-        if(subinstr(str_temp, ")") != 0 || chrepeat(str_temp, ')') > 1 || chrepeat(str_temp, '(') > 1)
+        if(subinstr(str_temp, ")") != 0)
         {
             fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (MATH)");
             exit(EXIT_FAILURE);
         }
 
-        int content_line = dislen(str_temp, 0, "(", ")");
+        int content_pos = lastpos(str_temp, "(");
+        int content_line = dislen(str_temp, content_pos, "(", ")");
         int arg_count = chrepeat(str_temp, ' '), x = 0;
         if(str_temp[strlen(str_temp)] == ' ') { arg_count-=1; }
 
@@ -213,7 +246,6 @@ void parser(char *str_temp, struct variable *var, int var_count)
     } /* PRINT */
     if(subinstr(str_temp, "clrscr()") == 0) { clrscr(); } /* CLEAR SCREEN */
     if(subinstr(str_temp, "quit()") == 0) { quit(); } /* QUIT */
-    free((char*) str_temp);
 }
 
 /* MADE BY @hanilr */
