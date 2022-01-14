@@ -1,0 +1,5 @@
+repeat(2) {print("foo ")} # foo foo 
+
+repeat(5) {(+ 1 2 3)} # 6 6 6 6 6
+
+repeat(11) {print("1 ")} # 1 1 1 1 1 1 1 1 1 1 1 
