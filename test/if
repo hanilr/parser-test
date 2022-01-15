@@ -1,0 +1,5 @@
+$foo = "bar"
+
+if($foo == bar) {print("hey")}
+
+# if($foo == bar) {print{"foo"};print("bar")}
