@@ -148,11 +148,101 @@ void parser(char *str_temp, struct variable *var, int var_count)
     }
     if(subinstr(str_temp, "if(") == 0) /* IF STATEMENT SECTION */
     {
-        
-    }
-    if(subinstr(str_temp, "ifelse(") == 0) /* IF ELSE STATEMENT SECTION */
-    {
-        
+        int command_pos = lastpos(str_temp, "if("), times;
+        int command_line = dislen(str_temp, command_pos, "(", ")");
+        int content_pos  = lastpos(str_temp, "{");
+        int content_line = dislen(str_temp, content_pos, "{", "}");
+        char *content = (char*) malloc(content_line+1);
+        char *command = (char*) malloc(command_line+1);
+
+        int i = 0;
+        while(command_line > i)
+        {
+            command[i] = str_temp[command_pos+i+1];
+            i+=1;
+        }
+
+        i = 0;
+        while(content_line > i)
+        {
+            content[i] = str_temp[content_pos+i+1];
+            i+=1;
+        }
+
+        if(subinstr(command, "==") == 0) /* IF EQUAL */
+        {
+            if(subinstr(command, "$") == 0) /* VARIABLE SECTION */
+            {
+                char *var_buffer = (char*) malloc(command_line+1);
+                char *var_equal = (char*) malloc(command_line+1);
+
+                int space_pos = lastpos_line(command, " ", 1)+1, var_point;
+                int sspace_pos = lastpos_line(command, " ", 2)+1; /* SECOND SPACE */
+                i = 0;
+                while(space_pos > 0)
+                {
+                    var_buffer[i] = command[i];
+                    i+=1;
+                }
+
+                i = 0;
+                while(sspace_pos > 0)
+                {
+                    var_equal[i] = command[space_pos+i];
+                    i+=1;
+                }
+
+                i = 0;
+                while(128 > i)
+                {
+                    if(subinstr(var[i].name, var_buffer) == 0)
+                    {
+                        var_point = i;
+                        break;
+                    }
+                    if(i == 127)
+                    {
+                        fprintf(stderr, "PARSER ERROR: No variable detected! (IF)");
+                        exit(EXIT_FAILURE);
+                    }
+                    i+=1;
+                }
+                i = 0;
+
+                if(var[var_count].value == var_equal && subinstr(content, ";") != 0) { parser(content, var, var_count); } /* TRUE */
+                else if(var[var_count].value == var_equal && subinstr(content, ";") == 0)
+                {
+                    int else_pos = lastpos(content, ";");
+                    while(1)
+                    {
+                        content[else_pos+i] = '\0';
+                        i+=1;
+                        if(content[else_pos+i] == '\0') { break; }
+                    }
+                    i = 0;
+                    parser(content, var, var_count);
+                }
+                else
+                {
+                    int else_pos = lastpos(content, ";");
+                    while(1)
+                    {
+                        content[i] = content[else_pos+i+1];
+                        content[else_pos+i+1] = '\0';
+                        i+=1;
+                    }
+                    parser(content, var, var_count);
+                }
+
+                free(var_equal);
+                free(var_buffer);
+            }
+            else { /* NONE VARIABLE SECTION */ }
+        }
+        else { /* OTHER LOGICAL OPERATIONS */ }
+        memset(str_temp, 0, strlen(str_temp)+1);
+        free(command);
+        free(content);
     }
 
     /* COMMANDS */
@@ -229,7 +319,11 @@ void parser(char *str_temp, struct variable *var, int var_count)
                     var_point = z;
                     break;
                 }
-                if(z == 127) { exit(EXIT_FAILURE); }
+                if(z == 127)
+                {
+                    fprintf(stderr, "PARSER ERROR: No variable detected! (PRINT)");
+                    exit(EXIT_FAILURE);
+                }
                 z+=1;
             }
             print_chars(var[var_point].value);
