@@ -1,5 +1,7 @@
 $foo = "bar"
 
-if($foo == bar) {print("hey")}
+if($foo == bar) {print("bar ")}
 
-# if($foo == bar) {print{"foo"};print("bar")}
+if($foo == bar) {print("barr "),print("none ");}
+
+if($foo == false) {print("barrr "),print("nonee ");}
