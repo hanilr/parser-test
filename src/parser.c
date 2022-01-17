@@ -161,7 +161,6 @@ void parser(char *str_temp, struct variable *var, int var_count)
             command[i] = str_temp[command_pos+i+1];
             i+=1;
         }
-
         i = 0;
         while(content_line > i)
         {
@@ -173,34 +172,33 @@ void parser(char *str_temp, struct variable *var, int var_count)
         {
             if(subinstr(command, "$") == 0) /* VARIABLE SECTION */
             {
-                char *var_buffer = (char*) malloc(command_line+1);
-                char *var_equal = (char*) malloc(command_line+1);
+                int space_pos = lastpos_line(command, " ", 1), var_point;
+                int sspace_pos = lastpos_line(command, " ", 2); /* SECOND SPACE */
+                char *var_buffer = (char*) malloc(space_pos);
+                char *var_equal = (char*) malloc(command_line-(sspace_pos+1));
 
-                int space_pos = lastpos_line(command, " ", 1)+1, var_point;
-                int sspace_pos = lastpos_line(command, " ", 2)+1; /* SECOND SPACE */
                 i = 0;
-                while(space_pos > 0)
+                while(space_pos > i+1)
                 {
-                    var_buffer[i] = command[i];
+                    var_buffer[i] = command[i+1];
                     i+=1;
                 }
-
                 i = 0;
-                while(sspace_pos > 0)
+                int equal_line = dislen(command, sspace_pos, " ", "\0");
+                while(equal_line > i)
                 {
-                    var_equal[i] = command[space_pos+i];
+                    var_equal[i] = command[sspace_pos+i+1];
                     i+=1;
                 }
-
                 i = 0;
-                while(128 > i)
+                while(127 > i)
                 {
                     if(subinstr(var[i].name, var_buffer) == 0)
                     {
                         var_point = i;
                         break;
                     }
-                    if(i == 127)
+                    if(i == 126)
                     {
                         fprintf(stderr, "PARSER ERROR: No variable detected! (IF)");
                         exit(EXIT_FAILURE);
@@ -208,32 +206,35 @@ void parser(char *str_temp, struct variable *var, int var_count)
                     i+=1;
                 }
                 i = 0;
-
-                if(var[var_count].value == var_equal && subinstr(content, ";") != 0) { parser(content, var, var_count); } /* TRUE */
-                else if(var[var_count].value == var_equal && subinstr(content, ";") == 0)
+                if(subinstr(var[var_point].value, var_equal) == 0 && subinstr(content, ",") != 0) { parser(content, var, var_count); } /* TRUE */
+                else if(subinstr(var[var_point].value, var_equal) == 0 && subinstr(content, ",") == 0) /* IF ELSE TRUE */
                 {
-                    int else_pos = lastpos(content, ";");
-                    while(1)
+                    int else_pos = lastpos(content, ",");
+                    char *content_if = (char*) malloc(content_line+1);
+                    memset(content_if, 0, content_line+1);
+                    while(else_pos > i)
                     {
-                        content[else_pos+i] = '\0';
-                        i+=1;
-                        if(content[else_pos+i] == '\0') { break; }
-                    }
-                    i = 0;
-                    parser(content, var, var_count);
-                }
-                else
-                {
-                    int else_pos = lastpos(content, ";");
-                    while(1)
-                    {
-                        content[i] = content[else_pos+i+1];
-                        content[else_pos+i+1] = '\0';
+                        content_if[i] = content[i];
                         i+=1;
                     }
-                    parser(content, var, var_count);
+                    printf("%s", content_if);
+                    parser(content_if, var, var_count);
+                    free(content_if);
                 }
-
+                else /* IF ELSE FALSE */
+                {
+                    int else_pos = lastpos(content, ",");
+                    int else_dis = dislen(content, else_pos, ",", ";");
+                    char *content_else = (char*) malloc(else_dis+1);
+                    memset(content_else, 0, else_dis+1);
+                    while(else_dis > i)
+                    {
+                        content_else[i] = content[else_pos+i+1];
+                        i+=1;
+                    }
+                    parser(content_else, var, var_count);
+                    free(content_else);
+                }
                 free(var_equal);
                 free(var_buffer);
             }
