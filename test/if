@@ -1,7 +1,7 @@
 $foo = "bar"
 
-if($foo == bar) {print("bar ")}
+# if($foo == bar:) {print("bar ")} # bar 
 
-if($foo == bar) {print("barr "),print("none ");}
+# if($foo == bar:) {print("barr "),print("none ");} # barr
 
-if($foo == false) {print("barrr "),print("nonee ");}
+# if($foo == false:) {print("barrr "),print("nonee ");} # nonee
