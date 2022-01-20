@@ -56,6 +56,7 @@ void file_parser(char *file_name)
         const char *str_temp = (char*) malloc(strlen(get_line(file_name, i))+1);
         str_temp = get_line(file_name, i);
         parser((char*) str_temp, var, var[0].count);
+        free((char*) str_temp);
         i+=1;
     }
 }
@@ -175,7 +176,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
                 int space_pos = lastpos_line(command, " ", 1), var_point;
                 int sspace_pos = lastpos_line(command, " ", 2); /* SECOND SPACE */
                 char *var_buffer = (char*) malloc(space_pos);
-                char *var_equal = (char*) malloc(command_line-(sspace_pos+1));
+                char *var_equal = (char*) malloc(command_line-(sspace_pos+1)+1);
 
                 i = 0;
                 while(space_pos > i+1)
@@ -184,7 +185,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
                     i+=1;
                 }
                 i = 0;
-                int equal_line = dislen(command, sspace_pos, " ", "\0");
+                int equal_line = dislen(command, sspace_pos, " ", ":");
                 while(equal_line > i)
                 {
                     var_equal[i] = command[sspace_pos+i+1];
@@ -210,14 +211,13 @@ void parser(char *str_temp, struct variable *var, int var_count)
                 else if(subinstr(var[var_point].value, var_equal) == 0 && subinstr(content, ",") == 0) /* IF ELSE TRUE */
                 {
                     int else_pos = lastpos(content, ",");
-                    char *content_if = (char*) malloc(content_line+1);
+                    char *content_if = (char*) malloc(else_pos+1);
                     memset(content_if, 0, content_line+1);
                     while(else_pos > i)
                     {
                         content_if[i] = content[i];
                         i+=1;
                     }
-                    printf("%s", content_if);
                     parser(content_if, var, var_count);
                     free(content_if);
                 }
