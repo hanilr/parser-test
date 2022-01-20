@@ -15,7 +15,7 @@ void calc_parser(char *raw, int arg_count)
 {
     if(chrepeat(raw, '+') > 1 || chrepeat(raw, '-') > 1 || chrepeat(raw, '*') > 1 || chrepeat(raw, '/') > 1)
     {
-        fprintf(stderr, "CALCULATOR PARSER ERROR: Too much operation symbol!");
+        fprintf(stderr, "\nCALCULATOR PARSER ERROR: Too much operation symbol!");
         exit(EXIT_FAILURE);
     }
     char operation = raw[0];
@@ -77,7 +77,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
     {
         if(var_count == 129)
         {
-            fprintf(stderr, "PARSER ERROR: Too much variable!");
+            fprintf(stderr, "\nPARSER ERROR: Too much variable!");
             exit(EXIT_FAILURE);
         }
 
@@ -201,7 +201,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
                     }
                     if(i == 126)
                     {
-                        fprintf(stderr, "PARSER ERROR: No variable detected! (IF)");
+                        fprintf(stderr, "\nPARSER ERROR: No variable detected! (IF)");
                         exit(EXIT_FAILURE);
                     }
                     i+=1;
@@ -251,7 +251,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
     {
         if(subinstr(str_temp, ")") != 0)
         {
-            fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (MATH)");
+            fprintf(stderr, "\nPARSER ERROR: Uncorrect syntax! (MATH)");
             exit(EXIT_FAILURE);
         }
 
@@ -274,7 +274,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
         /* ERRORS */
         if(subinstr(str_temp, ")") != 0)
         {
-            fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (PRINT)");
+            fprintf(stderr, "\nPARSER ERROR: Uncorrect syntax! (PRINT)");
             exit(EXIT_FAILURE);
         }
 
@@ -294,7 +294,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
         {
             if(subinstr(content, "\"") == 0)
             {
-                fprintf(stderr, "PARSER ERROR: Uncorrect syntax! (VARIABLE)");
+                fprintf(stderr, "\nPARSER ERROR: Uncorrect syntax! (VARIABLE)");
                 exit(EXIT_FAILURE);
             }
 
@@ -322,7 +322,7 @@ void parser(char *str_temp, struct variable *var, int var_count)
                 }
                 if(z == 127)
                 {
-                    fprintf(stderr, "PARSER ERROR: No variable detected! (PRINT)");
+                    fprintf(stderr, "\nPARSER ERROR: No variable detected! (PRINT)");
                     exit(EXIT_FAILURE);
                 }
                 z+=1;

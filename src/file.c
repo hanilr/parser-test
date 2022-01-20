@@ -16,7 +16,7 @@ const char *read_file(char *file)
     FILE *rf = fopen(file, "r");
     if(rf == 0)
     {
-        fprintf(stderr, "FILE ERROR: File not exist! (Read File)");
+        fprintf(stderr, "\nFILE ERROR: File not exist! (Read File)");
         exit(EXIT_FAILURE);
     }
 
@@ -39,7 +39,7 @@ const char *get_line(char *file, int line)
     FILE *gl = fopen(file, "r");
     if(gl == 0)
     {
-        fprintf(stderr, "FILE ERROR: File not exist! (Get Line)");
+        fprintf(stderr, "\nFILE ERROR: File not exist! (Get Line)");
         exit(EXIT_FAILURE);
     }
 

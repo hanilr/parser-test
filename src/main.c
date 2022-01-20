@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     }
     else if(argc > 2)
     {
-        fprintf(stderr, "MISSING ARGUMENT!");
+        fprintf(stderr, "\nMISSING ARGUMENT!");
         return 1;
     }
     else { file_parser(argv[1]); }
