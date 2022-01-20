@@ -38,7 +38,63 @@ The aim of this project is to understand how parsers in compilers work and to ma
 
 
 # Guide
-!Guide section will be added!
+### CLI (Command Line Interface)
+Execute the compiled file with no argument. Then just write what you want in command line.
+- Variables not working.
+
+### Print (Writing in terminal)
+Print function need two quotation mark if you want to write a string.
+- Example: ` print("foo") `
+
+Printing a variable is simple just write a defined variable. Need '$' symbol before variable name.
+- Example:
+    ` $foo = "bar" `
+    ` print($foo) `
+
+Note: '\0' and '\n' allowed.
+
+### Loop Statement
+Loop section only has 'repeat()' function which means can only repeat with certain values.
+- Example: ` repeat(12) {print("foo ")} `
+
+### If Statement
+If section can only use once in a file. And also part of if else true section doesn't work.
+- Only works with variables.
+- In comparing variables doesn't need quotation marks.
+- Examples: ` $foo == "bar" `
+    * ` if($foo == bar:) {print("bar ")} ` Result: bar 
+    * ` if($foo == bar:) {print("bar "),print("false ");} ` Doesn't work!
+    * ` if($foo == foo:) {print("bar "),print("false ");} ` Result: false 
+
+### Variable
+You need just defining a variable. You can use in 'print()', 'repeater()' and 'if()' functions.
+- Example: ` $foo = "bar" `
+
+### Basic Calculator
+Basic calculator means can't calculate 2 digit numbers. And you can calculate only addition, subtraction, multiplication and division operations.
+- Calculating section doesn't need 'print()' function. Because it print itself.
+- If result is not digit in division section then result is 0.
+- Example:
+    * ` (+ 1 2) ` Result: 3
+    * ` (- 2 1) ` Result: 1
+    * ` (* 2 3) ` Result: 6
+    * ` (/ 4 2) ` Result: 2
+    * ` (/ 3 2) ` Result: 0
+    * ` (+ 1 2 3) ` Result: 6
+    * ` (+ 1 2 3 4) ` Result: 10
+
+### Comment
+Comment section is like python does. Comment symbol is '#'
+- Example: ` print("foo") # This is comment line. `
+
+### File Parser
+File parser doesn't compile just executing a file like python or lua does.
+- No need a file extension.
+- Example:
+    * ` acc.exe test/print `
+    * ` ./acc demo/all_in_one`
+
+### **Note: Parser may be sensitivity to the placement of spaces!**
 
 # Bugs
 * If else true statement not working.
